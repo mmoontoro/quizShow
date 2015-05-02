@@ -6,6 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+	<h2>Quiz Show: el juego de las preguntas</h2>
 	<p><%= respuesta %> <p>
 	<a href="/quizes/question">Intentelo de nuevo</a>
   </body>
