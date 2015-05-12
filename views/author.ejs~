@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-
+  <head>
+    <title>Creditos</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
   <body>
     <h3>Créditos</h3>
 	<p>Mariano Montoro Mendoza.</p>
