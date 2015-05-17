@@ -6,6 +6,7 @@
 	Pregunta: <%= quiz.pregunta %> <p>
 	<input type="text" name="respuesta" value="Responda aqui"/>
 	<input type="submit" value="Enviar">
+	<a href="/quizes"><button type="button">Volver</button></a>
 </form>
   </body>
 </html>
