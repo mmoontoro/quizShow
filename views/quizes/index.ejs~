@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8"><title>Quiz Show</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
   <body>
 	<table>
 	<% var i; for(i=0; i<quizes.length; i++) { %>
