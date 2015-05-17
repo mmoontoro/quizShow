@@ -37,6 +37,7 @@ exports.answer = function(req, res){
 	}
 	res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
 };
+//GET quizes/new
 exports.new = function(req, res){
 	var quiz = models.Quiz.build( //crea objeto quiz
 	{pregunta: "Pregunta", respuesta: "Respuesta"}
@@ -56,5 +57,23 @@ exports.create = function(req,res){
 	} // res.redirect: Redirección HTTP a lista de preguntas
 	}
 	);
+};
+//GET quizes/edit
+exports.edit = function(req, res){
+	var quiz = req.quiz;
+	res.render('quizes/edit', {quiz: quiz, errors: []});
+};
+//GET quizes/update
+exports.update = function(req, res){
+	req.quiz.pregunta = req.body.quiz.pregunta;
+	req.quiz.respuesta = req.body.quiz.respuesta;
+	
+	req.quiz.validate().then(function(err){
+		if(err){
+			res.render('quizes/edit', {quiz: req.quiz, errors: err.errors});
+		} else {
+			req.quiz.save({fields: ["pregunta", "respuesta" ]}).then( function(){ res.redirect('/quizes');});
+		}
+	});
 };
 	

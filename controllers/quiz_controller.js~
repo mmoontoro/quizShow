@@ -14,7 +14,7 @@ exports.index = function(req, res) {
 	if(req.query.search===undefined){
 		models.Quiz.findAll().then(
 		function(quizes) {
-		res.render('quizes/index.ejs', {quizes: quizes});
+		res.render('quizes/index.ejs', {quizes: quizes, errors: []});
 		})
 	}else{var search =req.query.search;
 		search = "%"+search+"%";
@@ -37,6 +37,7 @@ exports.answer = function(req, res){
 	}
 	res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
 };
+//GET quizes/new
 exports.new = function(req, res){
 	var quiz = models.Quiz.build( //crea objeto quiz
 	{pregunta: "Pregunta", respuesta: "Respuesta"}
@@ -56,5 +57,14 @@ exports.create = function(req,res){
 	} // res.redirect: Redirección HTTP a lista de preguntas
 	}
 	);
+};
+//GET quizes/edit
+exports.edit = function(req, res){
+	var quiz = req.quiz;
+	res.render('quizes/edit', {quiz: quiz, errors: []});
+};
+//GET quizes/update
+exports.update = function(req, res){
+
 };
 	
