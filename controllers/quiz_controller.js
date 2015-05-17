@@ -8,26 +8,26 @@ exports.load = function(req, res, next, quizId) {
 	} else{next(new Error('No existe quizId=' + quizId))}
 	}
 	).catch(function(error){next(error)});
-	};
+};
 // GET /quizes
 exports.index = function(req, res) {
 	if(req.query.search===undefined){
 		models.Quiz.findAll().then(
-			function(quizes) {
-				res.render('quizes/index.ejs', {quizes: quizes});
+		function(quizes) {
+		res.render('quizes/index.ejs', {quizes: quizes, errors: []});
 		})
 	}else{var search =req.query.search;
 		search = "%"+search+"%";
 		search = search.replace(/ /g,'%');
 		console.log(search);
 		models.Quiz.findAll({where: ["pregunta like ?", search]}).then(
-									function(quizes) {
-										res.render('quizes/index.ejs', {quizes: quizes});
+		function(quizes) {
+		res.render('quizes/index.ejs', {quizes: quizes, errors: []});
 	})}
 };
 // GET /quizes/question
 exports.show = function(req, res){
-	res.render('quizes/show', { quiz: req.quiz});
+	res.render('quizes/show', { quiz: req.quiz, errors: []});
 	};
 //GET /quizes/answer
 exports.answer = function(req, res){
@@ -35,7 +35,7 @@ exports.answer = function(req, res){
 	if (req.query.respuesta === req.quiz.respuesta){
 		resultado='Correcto';
 	}
-	res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado});
+	res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
 };
 exports.new = function(req, res){
 	var quiz = models.Quiz.build( //crea objeto quiz
