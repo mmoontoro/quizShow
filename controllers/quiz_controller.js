@@ -1,4 +1,16 @@
 var models= require('../models/models.js');
+
+exports.ownershipRequired = function(req, res, next){
+	var objQuizOwner = req.quiz.UserId;
+	var logUser = req.session.user.id;
+	var isAdmin = req.session.user.isAdmin;
+	if (isAdmin || objQuizOwner === logUser) {
+		next();
+	} else {
+		res.redirect('/');
+	}
+};
+
 // Autoload :id
 exports.load = function(req, res, next, quizId) {
 	models.Quiz.find({where: { id: Number(quizId) }, include: [{model: models.Comment}]}).then(function(quiz) {
@@ -53,7 +65,7 @@ exports.create = function(req,res){
 		res.render('quizes/new', {quiz: quiz, errors: err.errors});
 	} else {
 		quiz // save: guarda en DB campos pregunta y respuesta de quiz
-		.save({fields: ["pregunta", "respuesta", "UserId" ]})
+		.save({fields: ["pregunta", "respuesta", "UserId"]})
 		.then( function(){ res.redirect('/quizes')})
 	} // res.redirect: Redirección HTTP a lista de preguntas
 	}

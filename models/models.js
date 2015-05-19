@@ -24,10 +24,13 @@ var Comment = sequelize.import(comment_path);
 
 // Importar definicion de la tabla Comment
 var user_path = path.join(__dirname,'user');
-var User = sequelize.import(user_path);
 
 Comment.belongsTo(Quiz);
 Quiz.hasMany(Comment);
+
+var User = sequelize.import(user_path);
+Quiz.belongsTo(User);
+User.hasMany(Quiz);
 
 exports.Quiz = Quiz;
 exports.Comment = Comment;

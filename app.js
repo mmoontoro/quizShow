@@ -46,6 +46,13 @@ app.use(function(req, res, next) {
 
 app.use('/', routes);
 
+app.use(function(req,res,next){
+var f = new Date();
+f = f.getMinutes();
+req.session.hora = req.session.hora || f;
+next();
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

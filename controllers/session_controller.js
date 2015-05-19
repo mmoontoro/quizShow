@@ -14,6 +14,20 @@ exports.new = function(req, res) {
  res.render('sessions/new', {errors: errors});
 };
 
+exports.auto_logout = function(req,res,next){
+	var minutes = new Date;
+	minutes = minutes.getMinutes();
+	console.log("logout");
+	if(req.session.user){
+	if((minutes-req.session.hora)>2){
+	delete req.session.user;
+	}else{
+	req.session.hora = minutes;
+	}
+	}
+	next();
+};
+
 exports.create = function(req, res) {
 
  var login = req.body.login;
@@ -27,10 +41,7 @@ exports.create = function(req, res) {
  res.redirect("/login");
  return;
  }
-
- // Crear req.session.user y guardar campos id y username
- // La sesión se define por la existencia de: req.session.user
- req.session.user = {id:user.id, username:user.username};
+ req.session.user = {id:user.id, username:user.username, isAdmin:user.isAdmin};
 
  res.redirect(req.session.redir.toString());// redirección a path anterior a login
  });
