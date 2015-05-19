@@ -109,3 +109,24 @@ exports.destroy = function(req, res){
 	req.quiz.destroy().then(function(){res.redirect('/quizes');
 	}).catch(function(error){next(error)});
 };
+
+//Statistics
+exports.statistics = function(req,res) {
+	models.Quiz.count().then(function(preguntas){
+	models.Comment.count().then(function(comentarios){
+	models.Quiz.findAll({
+	include: [{ model: models.Comment }]
+	}).then(function(quizes){
+	quizcomentado=0;
+	if(quizes){
+		for(i in quizes){
+			if (quizes[i].Comments.length)
+				quizcomentado++
+			}
+			} else {
+		}
+		res.render('quizes/statistics',{preguntas:preguntas, comentarios:comentarios, quizcomentado:quizcomentado,errors:[]});
+	})
+	})
+	})
+}; 

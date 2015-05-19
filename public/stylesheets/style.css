@@ -12,3 +12,71 @@ display: inline-block;}
 #ErrorMsgs { color: #f61; font-size: smaler}
 .right {float: right;}
 .quiz_img { height: 150px; float: left;}
+
+
+table{
+	font-family: "Tahoma", Verdana, Arial, Helvetica, sans-serif;
+	font-size:  75%;
+	border-collapse: collapse;
+}
+caption{
+	background: url(title.png) no-repeat 50px;
+	font-size: 400%;
+	text-indent: -10000px;
+}
+thead tr{
+	background-color: #D9FFD9;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+tfoot tr{
+	background-color: #FFFFFF;
+}
+
+thead th{
+	padding: 0.5em;
+	white-space: nowrap;
+}
+
+tfoot th{
+	font-size: 110%;
+	text-align: right;
+	padding-right: 0.5em;
+	letter-spacing: 1px;
+	background:  
+}
+
+tfoot td{
+	padding-left: 0.5em;
+	color: red;
+	font-size: 110%;
+	font-weight: 600;
+}
+
+tfoot td:hover{
+	background-color: red;
+	color: white;
+}
+
+tr{
+	background-color: #EEEEEE;
+}
+
+tr.odd{
+	background-color: #FFFFFF;
+}
+
+tbody tr:hover{
+	background-color: #bbbbbb;
+}
+
+td, th{
+	border: 1px dotted #666666;
+}
+
+tbody td
+{
+	padding: 0.5em;
+}
+

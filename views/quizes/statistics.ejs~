@@ -1,0 +1,20 @@
+<h2> Estadísticas </h2>
+<table>
+      <tr>
+        <th><h3>Usuario</h3></th>
+        <th><h3>Preguntas totales</h3></th>
+        <th>Comentadas</th>
+        <th>Sin comentar</th>
+        <th><h3>Comentarios totales</h3></th>
+        <th>Medios por pregunta</th>
+
+      </tr>
+      <tr>
+        <th>Todos</th>
+        <th><%=preguntas%></th>
+        <th><%=quizcomentado%></th>
+        <th><%=preguntas-quizcomentado%></th>
+        <th><%=comentarios%></th>
+        <th><%if (preguntas) {%> <%=comentarios/preguntas%> <% } else {%> 0 <%}%></th>
+      </tr>
+    </table>
