@@ -1,4 +1,5 @@
 var express = require('express');
+var multer = require('multer');
 var router = express.Router();
 var quizController=require('../controllers/quiz_controller');
 var commentController=require('../controllers/comment_controller');
@@ -31,8 +32,8 @@ router.get('/quizes/:quizId(\\d+)', sessionController.auto_logout, quizControlle
 router.get('/quizes/:quizId(\\d+)/answer', sessionController.auto_logout, quizController.answer);
 
 router.get('/quizes/new', sessionController.auto_logout, sessionController.loginRequired, quizController.new);
-router.post('/quizes/create', sessionController.auto_logout, sessionController.loginRequired, quizController.create);
-router.put('/quizes/:quizId(\\d+)', sessionController.auto_logout, sessionController.loginRequired, quizController.ownershipRequired, quizController.update);
+router.post('/quizes/create', sessionController.auto_logout, sessionController.loginRequired, multer({ dest: './public/media/'}), quizController.create);
+router.put('/quizes/:quizId(\\d+)', sessionController.auto_logout, sessionController.loginRequired, multer({ dest: './public/media/'}), quizController.ownershipRequired, quizController.update);
 router.get('/quizes/:quizId(\\d+)/edit', sessionController.auto_logout, sessionController.loginRequired, quizController.ownershipRequired, quizController.edit);
 router.delete('/quizes/:quizId(\\d+)', sessionController.auto_logout, sessionController.loginRequired, quizController.ownershipRequired, quizController.destroy);
 
