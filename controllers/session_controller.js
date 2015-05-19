@@ -19,11 +19,12 @@ exports.auto_logout = function(req,res,next){
 	minutes = minutes.getMinutes();
 	console.log("logout");
 	if(req.session.user){
-	if((minutes-req.session.hora)>2){
-	delete req.session.user;
-	}else{
-	req.session.hora = minutes;
-	}
+		if((minutes-req.session.hora)>2){
+			delete req.session.user;
+			req.session.hora = minutes;
+		}else{
+			req.session.hora = minutes;
+		}
 	}
 	next();
 };

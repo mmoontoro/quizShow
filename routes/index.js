@@ -4,6 +4,7 @@ var quizController=require('../controllers/quiz_controller');
 var commentController=require('../controllers/comment_controller');
 var sessionController=require('../controllers/session_controller');
 var userController=require('../controllers/user_controller');
+var authorController=require('../controllers/author_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -20,28 +21,26 @@ router.get('/logout', sessionController.destroy);
 
 router.get('/user', userController.new); // formulario sign un
 router.post('/user', userController.create); // registrar usuario
-router.get('/user/:userId(\\d+)/edit', sessionController.loginRequired, userController.ownershipRequired, userController.edit);
-router.put('/user/:userId(\\d+)', sessionController.loginRequired, userController.ownershipRequired, userController.update);
-router.delete('/user/:userId(\\d+)', sessionController.loginRequired, userController.ownershipRequired, userController.destroy);
+router.get('/user/:userId(\\d+)/edit', sessionController.auto_logout, sessionController.loginRequired, userController.ownershipRequired, userController.edit);
+router.put('/user/:userId(\\d+)', sessionController.auto_logout, sessionController.loginRequired, userController.ownershipRequired, userController.update);
+router.delete('/user/:userId(\\d+)', sessionController.auto_logout, sessionController.loginRequired, userController.ownershipRequired, userController.destroy);
+router.get('/user/:userId(\\d+)/quizes', quizController.index); 
 
 router.get('/quizes', sessionController.auto_logout, quizController.index);
 router.get('/quizes/:quizId(\\d+)', sessionController.auto_logout, quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', sessionController.auto_logout, quizController.answer);
 
-router.get('/quizes/new', sessionController.loginRequired, quizController.new);
-router.post('/quizes/create', sessionController.loginRequired, quizController.create);
-router.put('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.ownershipRequired, quizController.update);
-router.get('/quizes/:quizId(\\d+)/edit', sessionController.loginRequired, quizController.ownershipRequired, quizController.edit);
-router.delete('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.ownershipRequired, quizController.destroy);
+router.get('/quizes/new', sessionController.auto_logout, sessionController.loginRequired, quizController.new);
+router.post('/quizes/create', sessionController.auto_logout, sessionController.loginRequired, quizController.create);
+router.put('/quizes/:quizId(\\d+)', sessionController.auto_logout, sessionController.loginRequired, quizController.ownershipRequired, quizController.update);
+router.get('/quizes/:quizId(\\d+)/edit', sessionController.auto_logout, sessionController.loginRequired, quizController.ownershipRequired, quizController.edit);
+router.delete('/quizes/:quizId(\\d+)', sessionController.auto_logout, sessionController.loginRequired, quizController.ownershipRequired, quizController.destroy);
 
-router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
-router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
-router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.ownershipRequired, commentController.publish);
+router.get('/quizes/:quizId(\\d+)/comments/new', sessionController.auto_logout, commentController.new);
+router.post('/quizes/:quizId(\\d+)/comments', sessionController.auto_logout, commentController.create);
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.auto_logout, sessionController.loginRequired, commentController.ownershipRequired, commentController.publish);
 
+router.get('/author', sessionController.auto_logout, authorController.author);
 
-/* GET author page. */
-router.get('/author', function(req, res) {
-  res.render('author', {errors: []});
-});
 
 module.exports = router;
