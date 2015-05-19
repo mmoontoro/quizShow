@@ -25,7 +25,7 @@ router.post('/user', userController.create); // registrar usuario
 router.get('/user/:userId(\\d+)/edit', sessionController.auto_logout, sessionController.loginRequired, userController.ownershipRequired, userController.edit);
 router.put('/user/:userId(\\d+)', sessionController.auto_logout, sessionController.loginRequired, userController.ownershipRequired, userController.update);
 router.delete('/user/:userId(\\d+)', sessionController.auto_logout, sessionController.loginRequired, userController.ownershipRequired, userController.destroy);
-router.get('/user/:userId(\\d+)/quizes', quizController.index); 
+router.get('/user/:userId(\\d+)/quizes', sessionController.auto_logout, quizController.index); 
 
 router.get('/quizes', sessionController.auto_logout, quizController.index);
 router.get('/quizes/:quizId(\\d+)', sessionController.auto_logout, quizController.show);
@@ -42,6 +42,8 @@ router.post('/quizes/:quizId(\\d+)/comments', sessionController.auto_logout, com
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.auto_logout, sessionController.loginRequired, commentController.ownershipRequired, commentController.publish);
 
 router.get('/author', sessionController.auto_logout, authorController.author);
+router.get('/quizes/statistics', sessionController.auto_logout, quizController.statistics);
+
 
 
 module.exports = router;
