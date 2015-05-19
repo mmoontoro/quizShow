@@ -30,7 +30,7 @@ router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 
 /* GET author page. */
 router.get('/author', function(req, res) {
-  res.render('author');
+  res.render('author', {errors: []});
 });
 
 module.exports = router;
