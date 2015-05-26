@@ -29,12 +29,14 @@ Comment.belongsTo(Quiz);
 Quiz.hasMany(Comment);
 
 var User = sequelize.import(user_path);
-Quiz.belongsTo(User);
-User.hasMany(Quiz);
+var Favourites = sequelize.import(path.join(__dirname,'favourites'));
+User.belongsToMany(Quiz, {through: 'Favourites'});
+Quiz.belongsToMany(User, {through: 'Favourites'});
 
 exports.Quiz = Quiz;
 exports.Comment = Comment;
 exports.User = User;
+exports.Favourites = Favourites;
 
 
 sequelize.sync().then(function() {
